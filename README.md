@@ -1,5 +1,8 @@
 # StateMachine
 
+[![CircleCI](https://circleci.com/gh/Tinder/StateMachine.svg?style=svg)](https://circleci.com/gh/Tinder/StateMachine)
+[![Release](https://jitpack.io/v/tinder/statemachine.svg)](https://jitpack.io/#tinder/statemachine)
+
 A Kotlin DSL for finite state machine.
 
 `StateMachine` is used in [Scarlet](https://github.com/Tinder/Scarlet)
@@ -83,19 +86,30 @@ then(logger).should().log(ON_MELTED_MESSAGE)
 ~~~
 
 ### Download
-**TODO: make the jar public**
 
-Download [the latest JAR][latest-jar] or grab via Maven:
+While we are working on Bintray support, `StateMachine` is available via [JitPack][jitpack].
+
+##### Maven:
 ```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
 <dependency>
-  <groupId>com.tinder</groupId>
-  <artifactId>state-machine</artifactId>
-  <version>0.0.1</version>
+    <groupId>com.github.tinder</groupId>
+    <artifactId>statemachine</artifactId>
+    <version>0.1.2</version>
 </dependency>
 ```
-or Gradle:
+
+##### Gradle:
 ```groovy
-implementation 'com.tinder:state-machine:0.0.1'
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
+}
+
+implementation 'com.github.tinder:statemachine:0.1.2'
 ```
 
 ### License
@@ -127,3 +141,4 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ~~~
 
 [latest-jar]: https://tinder.com/
+[jitpack]: https://jitpack.io/#tinder/statemachine
