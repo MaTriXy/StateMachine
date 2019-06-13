@@ -1,7 +1,7 @@
 package com.tinder
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.then
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.then
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatIllegalStateException
@@ -695,6 +695,27 @@ internal class StateMachineTest {
                 assertThatIllegalArgumentException().isThrownBy {
                     StateMachine.create<String, Int, String> {}
                 }
+            }
+        }
+
+        class WithMissingStateDefinition {
+
+            private val stateMachine = StateMachine.create<String, Int, Nothing> {
+                initialState(STATE_A)
+                state(STATE_A) {
+                    on(EVENT_1) {
+                        transitionTo(STATE_B)
+                    }
+                }
+                // Missing STATE_B definition.
+            }
+
+            @Test
+            fun transition_givenMissingDestinationStateDefinition_shouldThrowIllegalStateExceptionWithStateName() {
+                // Then
+                assertThatIllegalStateException()
+                    .isThrownBy { stateMachine.transition(EVENT_1) }
+                    .withMessage("Missing definition for state ${STATE_B.javaClass.simpleName}!")
             }
         }
 
